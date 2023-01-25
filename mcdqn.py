@@ -17,7 +17,7 @@ model.compile(
 
 env = gym.make("MountainCar-v0", render_mode="human")
 GAMMA = 0.99
-EPSILON = 0.05
+EPSILON = 0.05  # ε-greedy 法のε。ときどきランダムに変なことをするための値。
 
 x_train = None
 y_train = None
@@ -26,7 +26,7 @@ for i in range(1000000):
   x, v = obs
   q = model.predict(np.array([[x, v]]), verbose=0)[0]
   action = list(q).index(max(q))
-  if np.random.rand() < EPSILON: action = env.action_space.sample()
+  if np.random.rand() < EPSILON: action = env.action_space.sample() # ε-greedy
   print(q, action, x)
   obs, rew, term, truncated, info = env.step(action)
   #if (i % 10 == 0): env.render()
