@@ -47,6 +47,7 @@ for i in range(1000000):
     x_batch = x_train[shuffled]
     y_batch = y_train[shuffled]
     model.fit(x_batch, y_batch, epochs=50, verbose=0)
+    keras.backend.clear_session()
     x_train = None
     y_train = None
     obs, info = env.reset()
